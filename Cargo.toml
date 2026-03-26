@@ -1,0 +1,27 @@
+[package]
+name = "tinnitus_freq_generator"
+version = "0.1.0"
+edition = "2021"
+description = "A tinnitus sound therapy tool with customizable frequency generation"
+
+[dependencies]
+eframe = "0.29"
+egui = "0.29"
+cpal = "0.15"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+dirs = "5"
+rand = "0.8"
+rfd = "0.15"
+
+# Windows-specific: hide console window in release builds
+[profile.release]
+opt-level = 2
+
+# Build as a Windows GUI app (no console window) in release mode
+[[bin]]
+name = "tinnitus_freq_generator"
+path = "src/main.rs"
+
+[target.'cfg(windows)'.build-dependencies]
+winres = "0.1"
