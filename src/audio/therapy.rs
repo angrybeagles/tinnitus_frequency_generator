@@ -453,7 +453,7 @@ impl FractalToneGenerator {
             1 + (self.next_random() % 2) as i32
         };
 
-        let new_idx = ((closest_idx as i32 + step) % 5) as usize;
+        let new_idx = ((closest_idx as i32 + step).rem_euclid(5)) as usize;
         let mut new_ratio = Self::PENTATONIC_RATIOS[new_idx];
 
         // Occasionally jump octaves
@@ -501,7 +501,7 @@ impl FractalToneGenerator {
             1.0
         };
 
-        let sine = (2.0 * PI * self.phase).sin();
+        let sine = (2.0 * std::f32::consts::PI * self.phase).sin();
         let sample = sine * self.volume * envelope;
 
         self.phase += self.current_freq / sample_rate;
